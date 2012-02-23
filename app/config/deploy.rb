@@ -20,5 +20,5 @@ set :shared_children,     ["vendor"]
 
 
 
-set :update_vendors, false
+set :update_vendors, true
 
