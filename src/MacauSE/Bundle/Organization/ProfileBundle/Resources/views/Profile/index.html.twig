@@ -1,0 +1,8 @@
+{% extends 'MacauSEOrganizationProfileBundle::layout.html.twig' %}
+
+{% block organization_content %}
+	{% for profile in profiles %}
+		{% include 'MacauSEOrganizationProfileBundle:Profile:index_single.html.twig' with {'profile': profile} %}
+	{% endfor %}
+
+{% endblock %}

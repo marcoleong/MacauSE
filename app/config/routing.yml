@@ -1,3 +1,13 @@
+MacauSEMainBundle:
+    resource: "@MacauSEMainBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+MacauSEOrganizationProfileBundle:
+    resource: "@MacauSEOrganizationProfileBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 # Internal routing configuration to handle ESI
 #_internal:
 #   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"

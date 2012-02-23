@@ -1,0 +1,23 @@
+{% extends 'MacauSEMainBundle::layout.html.twig' %}
+
+{% block content %}
+
+{% if app.session.hasFlash('notice') %}
+<div class="alert">
+  <a class="close" data-dismiss="alert">×</a>
+ 	{{ app.session.flash('notice') }}
+</div>
+{% endif %}
+
+
+	{% for result in results %}
+
+		<blockquote>
+			<strong>
+			  	<a href="{{ path('organization_profile_show', {'slug' : result.data.slug } )}}">{{ result.data.name }}</a>
+			</strong>
+		</blockquote>
+
+	{% endfor %}
+
+{% endblock %}

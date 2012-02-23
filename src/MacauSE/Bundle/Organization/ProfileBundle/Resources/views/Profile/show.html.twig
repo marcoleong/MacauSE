@@ -1,0 +1,40 @@
+{% extends 'MacauSEOrganizationProfileBundle::layout.html.twig' %}
+
+{% block organization_content %}
+<div class="hero-unit">
+<h1>{{ profile.name }}</h1>
+</div>
+<div class="profileTab tabbable tabs-above">
+	<ul class="nav nav-pills">
+	  <li class="active"><a href="#overview" data-toggle="tab">Overview</a></li>
+	  <li><a href="#services" data-toggle="tab">Services</a></li>
+	  <li><a href="#contacts" data-toggle="tab">Contacts</a></li>
+	  <li><a href="#settings" data-toggle="tab">Settings</a></li>
+	</ul>
+	 
+	<div class="tab-content">
+	  <div class="tab-pane active" id="overview">
+	  <h3>{{ profile.name }}</h3>
+		</div>
+	  <div class="tab-pane" id="services">...</div>
+	  <div class="tab-pane" id="contacts">
+	  	<address>
+	  		<strong>{{ profile.name }}</strong><br>
+			  		Twitter, Inc.<br>
+		795 Folsom Ave, Suite 600<br>
+		San Francisco, CA 94107<br>
+		P: (123) 456-7890<br>
+	  	</address>
+	  	
+</div>
+	  <div class="tab-pane" id="settings">...</div>
+	</div>
+</div>
+ 
+<script>
+  $(function () {
+    $('.profileTab').tab('show');
+  })
+</script>
+
+{% endblock %}

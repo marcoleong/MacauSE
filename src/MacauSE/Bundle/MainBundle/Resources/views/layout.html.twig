@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	{% stylesheets  '@MacauSEMainBundle/Resources/public/css/*'
+					'@MacauSEMainBundle/Resources/public/bootstrap/less/bootstrap.less'
+					  filter='less' %}
+	<link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+	{% endstylesheets %}
+
+	{% javascripts 	'@MacauSEMainBundle/Resources/public/js/jquery-1.7.1.min.js'
+	'@MacauSEMainBundle/Resources/public/bootstrap/js/bootstrap-tab.js'
+	'@MacauSEMainBundle/Resources/public/js/main.js' %}
+	<script src="{{ asset_url }}" type="text/javascript"></script>
+	{% endjavascripts%}
+	<title>{% block title %}MGCSE{% endblock %}</title>
+</head>
+<body>
+	<div class="navbar">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="{{ path('macause_homepage') }}">
+				  MCGSE
+				</a>
+
+				<ul class="nav">
+				  <li><a href="{{ path('macause_homepage') }}">Home</a></li>
+				  <li><a href="{{ path('organization_profile_directory') }}">Directory</a></li>
+  				  <li><a href="{{ path('organization_profile_create') }}">Create</a></li>
+
+				</ul>
+
+				<!-- <div class="btn-group pull-right">
+				  <a class="btn" href="#">中</a>
+				  <a class="btn" href="#">ENG</a>
+				  <a class="btn" href="#">PORT</a>
+				</div> -->
+			</div>
+		</div>
+	</div>
+	<div class="container">
+	{% block content %}
+	{% endblock %}
+	<hr />
+	<footer><p>© MGCSE 2012</p></footer>
+
+	</div>
+
+
+</html>

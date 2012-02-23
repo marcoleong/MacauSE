@@ -12,4 +12,6 @@ parameters:
   mailer_password:   ~
 
   locale:            en
-  secret:            ThisTokenIsNotSoSecretChangeIt
+  secret:            2fbd412950a9243017a57f7b6a568ad0
+
+  mongodb_default_database: test_macause

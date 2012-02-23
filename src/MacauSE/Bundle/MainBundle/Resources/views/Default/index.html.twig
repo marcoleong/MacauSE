@@ -1,0 +1,12 @@
+{% extends 'MacauSEMainBundle::layout.html.twig' %}
+
+{% block content %}
+	<div class="hero-unit">
+		<h1>Macau General Chamber of Social Enterprises - MGCSE</h1>
+	</div>
+
+	<form action="{{ path('macause_main_search') }}" method="GET" class="form-search offset3 row">
+		<input type="text" name="q" class="input-medium search-query span5" />
+		<input type="submit" value="search" class="btn" / >
+	</form>
+{% endblock %}

@@ -7,6 +7,8 @@ class AppKernel extends Kernel
 {
     public function registerBundles()
     {
+        date_default_timezone_set('Asia/Chongqing');
+
         $bundles = array(
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
@@ -17,10 +19,18 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+
+            new FOQ\ElasticaBundle\FOQElasticaBundle(),
+            new Symfony\Bundle\DoctrineMongoDBBundle\DoctrineMongoDBBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+
+
+            new MacauSE\Bundle\Organization\ProfileBundle\MacauSEOrganizationProfileBundle(),
+            new MacauSE\Bundle\MainBundle\MacauSEMainBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
-            $bundles[] = new Acme\DemoBundle\AcmeDemoBundle();
+            // $bundles[] = new Acme\DemoBundle\AcmeDemoBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
