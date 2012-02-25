@@ -74,13 +74,12 @@ doctrine_mongodb:
     document_managers:
         default:
             auto_mapping: true
-            mappings:
-                StofDoctrineExtensionsBundle: false
 
 stof_doctrine_extensions:
     default_locale: en_US
     mongodb:
-        default: ~
+        default:
+            sluggable: true
 
 
 

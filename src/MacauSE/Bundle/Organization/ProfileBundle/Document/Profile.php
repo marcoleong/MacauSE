@@ -7,7 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 
 /**
- * @MongoDB\Document
+ * @MongoDB\Document(collection="profiles")
  */
 class Profile
 {
@@ -17,12 +17,13 @@ class Profile
     protected $id;
 
     /**
+     * @Assert\NotBlank
      * @MongoDB\String
      */
     protected $name;
 
     /**
-     * @Gedmo\Slug(fields={"title"})
+     * @Gedmo\Slug(separator="-", updatable=true, fields={"name"})
      * @MongoDB\String
      */
     protected $slug;
@@ -37,7 +38,6 @@ class Profile
      * @var timestamp $created
      *
      * @MongoDB\Timestamp
-     * @Gedmo\Timestampable(on="create")
      */
     protected $created;
 
@@ -45,7 +45,6 @@ class Profile
      * @var date $updated
      *
      * @MongoDB\Date
-     * @Gedmo\Timestampable
      */
     protected $updated;
 
@@ -69,8 +68,11 @@ class Profile
      */
     protected $tags = array();
 
-
-
+    public function __construct()
+    {
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -99,16 +101,6 @@ class Profile
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
     }
 
     /**
@@ -241,12 +233,6 @@ class Profile
         return $this->contact;
     }
 
-
-    public function __construct()
-    {
-        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
     /**
      * Add tags
      *

@@ -12,7 +12,7 @@ class ProfileController extends Controller
 {
 
     /**
-     * @Route("/show/{slug}",name="organization_profile_show")
+     * @Route("/profile/{slug}",name="organization_profile_show")
      * @Template("MacauSEOrganizationProfileBundle:Profile:show.html.twig")
      */
     public function showAction($slug)
@@ -24,6 +24,7 @@ class ProfileController extends Controller
         if (!$profile) {
 	        throw $this->createNotFoundException('No organization found for slug '.$slug);
 	    }
+
 
     	return array('profile'=>$profile);
     }
@@ -74,9 +75,7 @@ class ProfileController extends Controller
 	            // perform some action, such as saving the task to the database
 	            $dm->persist($profile);
 	            $dm->flush();
-
-	            return $this->redirect($this->generateUrl('organization_profile_show', array('slug' => $profile->getSlug())
-	            ));
+	            return $this->redirect($this->generateUrl('organization_profile_show', array('slug' => $profile->getSlug())));
 	        }
 	    }
     	return array('form'=>$form->createView());
@@ -91,6 +90,7 @@ class ProfileController extends Controller
         $profiles = $this->get('doctrine.odm.mongodb.document_manager')
         ->getRepository('MacauSEOrganizationProfileBundle:Profile')
         ->findAll();
+
 
         if (!$profiles) {
             throw $this->createNotFoundException('No organization found for slug '.$slug);
