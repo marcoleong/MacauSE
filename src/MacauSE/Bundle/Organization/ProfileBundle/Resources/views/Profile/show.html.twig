@@ -1,25 +1,41 @@
 {% extends 'MacauSEOrganizationProfileBundle::layout.html.twig' %}
 
+{% block navbar %}
+	{% if isAuthenticated == true %}
+		<a href="#" class="btn" id="profileEditButton">Edit </a>
+		<script type="text/javascript" src="/bundles/macausemain/mercury/javascripts/mercury_loader.js"></script>
+		
+		<script type="text/javascript" charset="utf-8">
+				$("#profileEditButton").click(function(){
+					Mercury.trigger('toggle:interface');
+				})
+		</script>
+	{% endif %}
+
+{% endblock %}
+
 {% block organization_content %}
 <div class="hero-unit">
 <h1>{{ profile.name }}</h1>
 </div>
 <div class="profileTab tabbable tabs-above">
 	<ul class="nav nav-pills">
-	  <li class="active"><a href="#overview" data-toggle="tab">Overview</a></li>
+	  <li class="active"><a href="#description" data-toggle="tab">Description</a></li>
 	  <li><a href="#services" data-toggle="tab">Services</a></li>
 	  <li><a href="#contacts" data-toggle="tab">Contacts</a></li>
 	  <li><a href="#settings" data-toggle="tab">Settings</a></li>
 	</ul>
 	 
 	<div class="tab-content">
-	  <div class="tab-pane active" id="overview">
-	  <h3>{{ profile.name }}</h3>
-		</div>
-	  <div class="tab-pane" id="services">...</div>
+	  <div class="tab-pane active mercury-region" data-type="editable" id="description">
+
+		  {{ profile.description | raw }}
+
+	 </div>
+	  <div class="tab-pane mercury-region" data-type="editable" id="services">{{ profile.services | raw }}</div>
 	  <div class="tab-pane" id="contacts">
 	  	<address>
-	  		<strong>{{ profile.name }}</strong><br>
+	  		<strong>{{ profile.name}}</strong><br>
 			  		Twitter, Inc.<br>
 		795 Folsom Ave, Suite 600<br>
 		San Francisco, CA 94107<br>
@@ -30,11 +46,5 @@
 	  <div class="tab-pane" id="settings">...</div>
 	</div>
 </div>
- 
-<script>
-  $(function () {
-    $('.profileTab').tab('show');
-  })
-</script>
 
 {% endblock %}

@@ -4,3 +4,5 @@ app/cache/*
 app/logs/*
 build/
 vendor/
+web/js
+web/css

@@ -2,15 +2,15 @@
 
 {% form_theme form 'MacauSEOrganizationProfileBundle:Form:form.html.twig' %}
 
-
 {% block organization_content %}
 <div class="span11">
 <h2>Create New Organization</h2>
 <form class="form-horizontal" action="{{ path('organization_profile_create') }}" method="POST">
 	<fieldset>
-		<legend>New organization</legend>
+		<legend>1. Enter the Organization Name</legend>
 
-		{{ form_widget(form) }}
+		{{ form_row(form.name) }}
+		{{ form_row(form._token) }}
 
 		<div class="form-actions">
 			<input type="submit" class="btn" />

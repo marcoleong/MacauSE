@@ -23,7 +23,8 @@ class AppKernel extends Kernel
             new FOQ\ElasticaBundle\FOQElasticaBundle(),
             new Symfony\Bundle\DoctrineMongoDBBundle\DoctrineMongoDBBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-
+			new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+	        
 
             new MacauSE\Bundle\Organization\ProfileBundle\MacauSEOrganizationProfileBundle(),
             new MacauSE\Bundle\MainBundle\MacauSEMainBundle(),

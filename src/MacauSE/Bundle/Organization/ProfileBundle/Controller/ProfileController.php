@@ -24,9 +24,9 @@ class ProfileController extends Controller
         if (!$profile) {
 	        throw $this->createNotFoundException('No organization found for slug '.$slug);
 	    }
-
-
-    	return array('profile'=>$profile);
+		$isAuthenticated = true;
+		$this->getRequest()->getSession() ->set('slug',$slug);
+    	return array('profile'=>$profile, 'isAuthenticated' => $isAuthenticated);
     }
 
     
@@ -63,9 +63,9 @@ class ProfileController extends Controller
     	$profile = new Profile();
     	$form = $this->createFormBuilder($profile)
             ->add('name', 'text')
-            ->add('description', 'textarea')
-            ->add('services', 'textarea')
-            ->add('contact','textarea')
+            // ->add('description', 'textarea')
+            // ->add('services', 'textarea')
+            // ->add('contact','textarea')
             ->getForm();
 
         if ($request->getMethod() == 'POST') {
@@ -98,6 +98,4 @@ class ProfileController extends Controller
 
         return array('profiles'=>$profiles);
     }
-
-
 }

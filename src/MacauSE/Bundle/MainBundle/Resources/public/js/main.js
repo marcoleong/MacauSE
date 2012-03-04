@@ -1,0 +1,3 @@
+$(function () {
+  $('.profileTab').tab('show');
+})
