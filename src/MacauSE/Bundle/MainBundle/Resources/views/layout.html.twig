@@ -29,9 +29,17 @@
 				<ul class="nav">
 				  <li><a href="{{ path('macause_homepage') }}">Home</a></li>
 				  <li><a href="{{ path('organization_profile_directory') }}">Directory</a></li>
-  				  <li><a href="{{ path('organization_profile_create') }}">Create</a></li>
-
 				</ul>
+				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				<ul class="nav pull-right">
+					<li><a href="{{ path('organization_profile_create') }}"><strong>Create</strong></a></li>
+					
+					<li class="divider-vertical"></li>
+  				  	<li><a href="{{ path('fos_user_security_logout') }}">Log out</a></li>
+				</ul>
+				{% endif %}
+
+				
 				
 				{% block navbar %}{% endblock %}
 

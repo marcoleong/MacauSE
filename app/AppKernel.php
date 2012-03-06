@@ -24,10 +24,12 @@ class AppKernel extends Kernel
             new Symfony\Bundle\DoctrineMongoDBBundle\DoctrineMongoDBBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
 			new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+			new FOS\UserBundle\FOSUserBundle(),
 	        
 
             new MacauSE\Bundle\Organization\ProfileBundle\MacauSEOrganizationProfileBundle(),
             new MacauSE\Bundle\MainBundle\MacauSEMainBundle(),
+            new MacauSE\UserBundle\MacauSEUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

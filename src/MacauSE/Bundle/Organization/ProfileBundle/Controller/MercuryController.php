@@ -25,17 +25,24 @@ class MercuryController extends Controller
 		$request = $this->getRequest();
 		$session = $request->getSession();
 		$dm = $this->get('doctrine.odm.mongodb.document_manager');
-		$profile = $dm
-        ->getRepository('MacauSEOrganizationProfileBundle:Profile')
-        ->findOneBy(array('slug' => $session->get('slug')));
+		$profile = $dm->getRepository('MacauSEOrganizationProfileBundle:Profile')->findOneBy(array('slug' => $session->get('slug')));
 
 		$json = json_decode($request->request->get('content'),true);
+		
 		foreach($json as $key=>$value){
-			call_user_func(array($profile, 'set'.ucfirst($key)),$value['value']);
+			//safety measure
+			if(method_exists($profile,'set'.ucfirst($key))){
+				//calling set function for different field
+				call_user_func(array($profile, 'set'.ucfirst($key)),$value['value']);
+			}else{
+				throw new Exception('The function does not exist, most probably this field does not exist.');
+			}
 		}
+		
 		$dm->persist($profile);
 		$dm->flush();
-        return new Response(200);
+		
+        return new Response('',200);
     }
 
 

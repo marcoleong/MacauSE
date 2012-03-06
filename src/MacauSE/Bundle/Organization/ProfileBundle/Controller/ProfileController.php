@@ -12,7 +12,7 @@ class ProfileController extends Controller
 {
 
     /**
-     * @Route("/profile/{slug}",name="organization_profile_show")
+     * @Route("/show/{slug}",name="organization_profile_show")
      * @Template("MacauSEOrganizationProfileBundle:Profile:show.html.twig")
      */
     public function showAction($slug)
@@ -22,11 +22,11 @@ class ProfileController extends Controller
         ->findOneBy(array('slug' => $slug));
 
         if (!$profile) {
-	        throw $this->createNotFoundException('No organization found for slug '.$slug);
+	        throw $this->createNotFoundException('No organization found.');
 	    }
-		$isAuthenticated = true;
+
 		$this->getRequest()->getSession() ->set('slug',$slug);
-    	return array('profile'=>$profile, 'isAuthenticated' => $isAuthenticated);
+    	return array('profile'=>$profile);
     }
 
     

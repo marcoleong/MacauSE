@@ -61,7 +61,7 @@ class Profile
     /**
      * @MongoDB\String
      */
-    protected $contact;
+    protected $contacts;
 
     /**
      * @MongoDB\EmbedMany(targetDocument="Tag")
@@ -216,21 +216,21 @@ class Profile
     /**
      * Set contact
      *
-     * @param string $contact
+     * @param string $contacts
      */
-    public function setContact($contact)
+    public function setContact($contacts)
     {
-        $this->contact = $contact;
+        $this->contacts = $contacts;
     }
 
     /**
      * Get contact
      *
-     * @return string $contact
+     * @return string $contacts
      */
-    public function getContact()
+    public function getContacts()
     {
-        return $this->contact;
+        return $this->contacts;
     }
 
     /**

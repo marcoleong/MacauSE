@@ -1,13 +1,14 @@
 {% extends 'MacauSEOrganizationProfileBundle::layout.html.twig' %}
 
 {% block navbar %}
-	{% if isAuthenticated == true %}
-		<a href="#" class="btn" id="profileEditButton">Edit </a>
+	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+		<a href="#" class="btn pull-right" id="profileEditButton">Edit </a>
 		<script type="text/javascript" src="/bundles/macausemain/mercury/javascripts/mercury_loader.js"></script>
 		
 		<script type="text/javascript" charset="utf-8">
 				$("#profileEditButton").click(function(){
 					Mercury.trigger('toggle:interface');
+					$(this).toggleClass('btn-warning');
 				})
 		</script>
 	{% endif %}
@@ -15,9 +16,14 @@
 {% endblock %}
 
 {% block organization_content %}
-<div class="hero-unit">
-<h1>{{ profile.name }}</h1>
-</div>
+<p>
+	<h1>{{ profile.name }}</h1>
+	<div class="mercury-region" data-type="editable" id="short-description">
+	This is an organization which could help you on making a website and stuff.
+	</div>
+</p>
+
+<hr />
 <div class="profileTab tabbable tabs-above">
 	<ul class="nav nav-pills">
 	  <li class="active"><a href="#description" data-toggle="tab">Description</a></li>
@@ -28,22 +34,19 @@
 	 
 	<div class="tab-content">
 	  <div class="tab-pane active mercury-region" data-type="editable" id="description">
-
 		  {{ profile.description | raw }}
-
 	 </div>
 	  <div class="tab-pane mercury-region" data-type="editable" id="services">{{ profile.services | raw }}</div>
-	  <div class="tab-pane" id="contacts">
-	  	<address>
-	  		<strong>{{ profile.name}}</strong><br>
-			  		Twitter, Inc.<br>
-		795 Folsom Ave, Suite 600<br>
-		San Francisco, CA 94107<br>
-		P: (123) 456-7890<br>
-	  	</address>
-	  	
-</div>
-	  <div class="tab-pane" id="settings">...</div>
+		<div class="tab-pane" id="contacts">
+	  		<address>
+		  		<strong>{{ profile.name}}</strong><br>
+				  		Twitter, Inc.<br>
+			795 Folsom Ave, Suite 600<br>
+			San Francisco, CA 94107<br>
+			P: (123) 456-7890<br>
+		  	</address>
+		</div>
+	  <div class="tab-pane" id="settings"><h2>Meta Data <small>This field will show in the search field</small></h2></div>
 	</div>
 </div>
 
