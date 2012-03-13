@@ -1,3 +1,0 @@
-[submodule "bootstrap"]
-path = src/MacauSE/Bundle/MainBundle/Resources/public/bootstrap
-url = git://github.com/twitter/bootstrap.git

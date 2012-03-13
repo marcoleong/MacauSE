@@ -1,0 +1,35 @@
+
+<div class="tab-pane" id="settings">
+<h2>Meta Data <small>This field will show in the search field</small></h2>
+<h2>Tags <small>What is the tag holding.</small></h2>
+{# render "MacauSEOrganizationProfileBundle:Tag:renderForm" #}
+
+
+<form action="{{ path('organization_profile_show', {'slug':profile.slug }) }}" method="post" accept-charset="utf-8" id="profile_tag">
+	<ul id="profileTags">
+	    <!-- Existing list items will be pre-added to the tags -->
+		{% for tag in form.tags %}
+			<li>{{ tag.name.vars.value }}</li>
+		{% endfor %}
+	</ul>
+
+	{{ form_row(form._token) }}
+	<p><input type="submit" class="btn" value="Save"></p>
+</form>
+
+
+
+<script type="text/javascript" charset="utf-8">
+
+	var localJSON = [
+		{ "id": "1", "label": ",Hazel Grouse", "value": "Hazel Grouse" },
+		{ "id": "2", "label": "Common Quail",	"value": "Common Quail" },
+		{ "id": "3", "label": "Greylag Goose", "value": "Greylag Goose" }
+	];
+	$('#profileTags').tagit({
+		itemName: "tags"
+	});
+</script>
+
+
+</div>

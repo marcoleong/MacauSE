@@ -3,16 +3,46 @@
 {% block navbar %}
 	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 		<a href="#" class="btn pull-right" id="profileEditButton">Edit </a>
-		<script type="text/javascript" src="/bundles/macausemain/mercury/javascripts/mercury_loader.js"></script>
+		<!-- <script type="text/javascript" src="/bundles/macausemain/mercury/javascripts/mercury_loader.js"></script> -->
+		
 		
 		<script type="text/javascript" charset="utf-8">
-				$("#profileEditButton").click(function(){
-					Mercury.trigger('toggle:interface');
-					$(this).toggleClass('btn-warning');
-				})
+			$("#profileEditButton").click(function(){
+				Mercury.trigger('toggle:interface');
+				$(this).toggleClass('btn-warning');
+			})
 		</script>
 	{% endif %}
 
+{% endblock %}
+
+{% block head %}
+{{ parent() }}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+	{% javascripts 
+		'@MacauSEOrganizationProfileBundle/Resources/public/tagedit/js/jquery-ui-1.8.18.custom.min.js'
+		'@MacauSEOrganizationProfileBundle/Resources/public/tagedit/js/jquery.autoGrowInput.js'
+		'@MacauSEOrganizationProfileBundle/Resources/public/tagedit/js/jquery.tagedit.js'
+	
+		'@MarcoLeongMercuryEditorBundle/Resources/public/mercury/javascripts/mercury_loader.js'
+		'@MarcoLeongMercuryEditorBundle/Resources/public/mercury/javascripts/mercury.min.js'
+		
+		'@MacauSEOrganizationProfileBundle/Resources/public/tag-it/js/tag-it.js'
+	
+		'@MarcoLeongMercuryEditorBundle/Resources/public/mercury/javascripts/mercury_loader.js'
+		'@MarcoLeongMercuryEditorBundle/Resources/public/mercury/javascripts/mercury.min.js'
+	  %}
+	<script src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+
+	{% stylesheets '@MarcoLeongMercuryEditorBundle/Resources/public/mercury/stylesheets/mercury.bundle.css'
+	'@MacauSEOrganizationProfileBundle/Resources/public/tagedit/css/jquery.tagedit.css'
+	'@MacauSEOrganizationProfileBundle/Resources/public/tagedit/css/ui-lightness/jquery-ui-1.8.6.custom.css'
+
+		'@MacauSEOrganizationProfileBundle/Resources/public/tag-it/css/jquery.tagit.css'  %}
+	<link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+	{% endstylesheets %}
+{% endif %}
 {% endblock %}
 
 {% block organization_content %}
@@ -29,7 +59,9 @@
 	  <li class="active"><a href="#description" data-toggle="tab">Description</a></li>
 	  <li><a href="#services" data-toggle="tab">Services</a></li>
 	  <li><a href="#contacts" data-toggle="tab">Contacts</a></li>
+	{% if is_granted('ROLE_ADMIN') %}
 	  <li><a href="#settings" data-toggle="tab">Settings</a></li>
+	{% endif %}
 	</ul>
 	 
 	<div class="tab-content">
@@ -46,7 +78,9 @@
 			P: (123) 456-7890<br>
 		  	</address>
 		</div>
-	  <div class="tab-pane" id="settings"><h2>Meta Data <small>This field will show in the search field</small></h2></div>
+		{% if is_granted('ROLE_ADMIN') %}
+		{% include 'MacauSEOrganizationProfileBundle:Profile:show_setting.html.twig' with {'form':form,'profile':profile} %}
+		{% endif %}
 	</div>
 </div>
 

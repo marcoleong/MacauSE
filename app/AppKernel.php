@@ -11,22 +11,26 @@ class AppKernel extends Kernel
 
         $bundles = array(
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new Symfony\Bundle\SecurityBundle\SecurityBundle(),
-            new Symfony\Bundle\TwigBundle\TwigBundle(),
-            new Symfony\Bundle\MonologBundle\MonologBundle(),
-            new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
-            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
-            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+           	new Symfony\Bundle\SecurityBundle\SecurityBundle(),
+	           new Symfony\Bundle\TwigBundle\TwigBundle(),
+	           new Symfony\Bundle\MonologBundle\MonologBundle(),
+	           new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
+	           new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+	           new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
+	           new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+	           new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+	           new JMS\AopBundle\JMSAopBundle(),
+
+			    new JMS\DiExtraBundle\JMSDiExtraBundle($this),
 
             new FOQ\ElasticaBundle\FOQElasticaBundle(),
-            new Symfony\Bundle\DoctrineMongoDBBundle\DoctrineMongoDBBundle(),
+
+            new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
 			new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
 			new FOS\UserBundle\FOSUserBundle(),
 	        
-
+			new MarcoLeong\Bundle\MercuryEditorBundle\MarcoLeongMercuryEditorBundle(),
             new MacauSE\Bundle\Organization\ProfileBundle\MacauSEOrganizationProfileBundle(),
             new MacauSE\Bundle\MainBundle\MacauSEMainBundle(),
             new MacauSE\UserBundle\MacauSEUserBundle(),

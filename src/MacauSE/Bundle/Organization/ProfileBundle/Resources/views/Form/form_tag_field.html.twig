@@ -1,0 +1,22 @@
+
+
+	<form action="{{ path('profile_tag_form') }}" method="post" accept-charset="utf-8" id="profile_tag">
+		{{ form_row(form.tags, {'attr': {'class':'tag'} } ) }}
+		{{ form_row(form._token) }}
+		<p><input type="submit" class="btn" value="Continue &rarr;"></p>
+	</form>
+
+	<script type="text/javascript" charset="utf-8">
+
+		var localJSON = [
+			{ "id": "1", "label": "Hazel Grouse", "value": "Hazel Grouse" },
+			{ "id": "2", "label": "Common Quail",	"value": "Common Quail" },
+			{ "id": "3", "label": "Greylag Goose", "value": "Greylag Goose" }
+		];
+		$('#profile_tag input.tag').tagedit({
+			autocompleteOptions: {
+				source: localJSON
+			}
+		});
+	</script>
+	

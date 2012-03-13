@@ -11,11 +11,14 @@
 	<link href="{{ asset_url }}" rel="stylesheet" media="screen" />
 	{% endstylesheets %}
 
-	{% javascripts 	'@MacauSEMainBundle/Resources/public/js/jquery-1.7.1.min.js'
+	{% javascripts 	'js/vendor/jquery-1.7.1.min.js'
+	'js/vendor/underscore-min.js'
+	'js/vendor/backbone-min.js'
 	'@MacauSEMainBundle/Resources/public/bootstrap/js/bootstrap-tab.js'
 	'@MacauSEMainBundle/Resources/public/js/main.js' %}
 	<script src="{{ asset_url }}" type="text/javascript"></script>
 	{% endjavascripts%}
+	{% block head %}{% endblock %}
 	<title>{% block title %}MGCSE{% endblock %}</title>
 </head>
 <body>
@@ -30,9 +33,9 @@
 				  <li><a href="{{ path('macause_homepage') }}">Home</a></li>
 				  <li><a href="{{ path('organization_profile_directory') }}">Directory</a></li>
 				</ul>
-				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				{% if is_granted('ROLE_ADMIN') %}
 				<ul class="nav pull-right">
-					<li><a href="{{ path('organization_profile_create') }}"><strong>Create</strong></a></li>
+					<li><a href="{{ path('organization_profile_create') }}">Create</a></li>
 					
 					<li class="divider-vertical"></li>
   				  	<li><a href="{{ path('fos_user_security_logout') }}">Log out</a></li>

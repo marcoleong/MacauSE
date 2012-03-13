@@ -7,7 +7,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use MacauSE\Bundle\Organization\ProfileBundle\Document\Profile;
-
+use MacauSE\Bundle\Organization\ProfileBundle\Document\Tag;
+use MacauSE\Bundle\Organization\ProfileBundle\Form\Type\ProfileType;
 class ProfileController extends Controller
 {
 
@@ -17,16 +18,54 @@ class ProfileController extends Controller
      */
     public function showAction($slug)
     {
-    	$profile = $this->get('doctrine.odm.mongodb.document_manager')
-        ->getRepository('MacauSEOrganizationProfileBundle:Profile')
-        ->findOneBy(array('slug' => $slug));
+		$dm =  $this->get('doctrine.odm.mongodb.document_manager');
+		$request = $this->getRequest();
+    	$profile = $dm->getRepository('MacauSEOrganizationProfileBundle:Profile')->findOneBy(array('slug' => $slug));
 
+		// $tag1 = new Tag();
+		// $tag1->setName('Hello0');
+		// $tag2 = new Tag();
+		// $tag2->setName('Hello1');
+		// $tag3 = new Tag();
+		// $tag3->setName('Hello2');
+		// $profile->addTags($tag1);
+		// $profile->addTags($tag2);
+		// $profile->addTags($tag3);
+		
         if (!$profile) {
 	        throw $this->createNotFoundException('No organization found.');
 	    }
-
-		$this->getRequest()->getSession() ->set('slug',$slug);
-    	return array('profile'=>$profile);
+		$options = null;
+		if (true === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+			//option to turn off mercury
+			$options = array('mercury' => $request->query->get('mercury') );
+			$form = $this->createForm(new ProfileType(), $profile);
+			$form_view = $form->createView();
+			
+			if ($request->getMethod() == 'POST') {
+				//$form->bindRequest($request);
+				$tags = $request->request->get('tags');
+			
+				foreach($tags as $tag){
+					try{
+						$newTag = new Tag();
+						$newTag->setName($tag);
+						$profile->addTags($newTag);
+					}catch(Exception $e){
+						echo $e;
+					}
+				}
+				$dm->persist($profile);
+				$dm->flush();
+				
+		        return $this->redirect($this->generateUrl('organization_profile_show', array('slug' => $profile->getSlug())));
+			}
+		}else{
+			$form_view = null;
+		}
+		
+		$this->getRequest()->getSession()->set('slug',$slug);
+    	return array('profile'=>$profile,'form'=>$form_view,'options'=>$options);
     }
 
     
@@ -58,14 +97,10 @@ class ProfileController extends Controller
     public function createAction()
     {
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
-        $tags = $dm->getRepository('MacauSEOrganizationProfileBundle:Tag')->findAll();
     	$request = $this->getRequest();
     	$profile = new Profile();
     	$form = $this->createFormBuilder($profile)
             ->add('name', 'text')
-            // ->add('description', 'textarea')
-            // ->add('services', 'textarea')
-            // ->add('contact','textarea')
             ->getForm();
 
         if ($request->getMethod() == 'POST') {
@@ -98,4 +133,5 @@ class ProfileController extends Controller
 
         return array('profiles'=>$profiles);
     }
+
 }
