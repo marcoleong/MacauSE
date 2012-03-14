@@ -4,12 +4,13 @@ namespace MacauSE\Bundle\Organization\ProfileBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
 
 
 /**
  * @MongoDB\Document
  */
-class Profile
+class Profile implements Translatable
 {
     /**
      * @MongoDB\Id
@@ -17,6 +18,7 @@ class Profile
     protected $id;
 
     /**
+	 * @Gedmo\Translatable
      * @Assert\NotBlank
      * @MongoDB\String
      */
@@ -30,7 +32,6 @@ class Profile
 
     /**
      * @MongoDB\String
-     * @Assert\Locale
      */
     protected $locale;
 
@@ -49,16 +50,19 @@ class Profile
     protected $updated;
 
     /**
+	 * @Gedmo\Translatable
      * @MongoDB\String
      */
     protected $description;
 
     /**
+	 * @Gedmo\Translatable
      * @MongoDB\String
      */
     protected $services;
 
     /**
+	 * @Gedmo\Translatable
      * @MongoDB\String
      */
     protected $contacts;

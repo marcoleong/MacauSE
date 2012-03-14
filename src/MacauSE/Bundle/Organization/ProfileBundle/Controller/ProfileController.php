@@ -10,9 +10,6 @@ use MacauSE\Bundle\Organization\ProfileBundle\Document\Profile;
 use MacauSE\Bundle\Organization\ProfileBundle\Document\Tag;
 use MacauSE\Bundle\Organization\ProfileBundle\Form\Type\ProfileType;
 
-/**
- * @Route("/{_locale}", requirements={"_locale" = "(en|fr|de)"})
- */
 class ProfileController extends Controller
 {
 
@@ -33,6 +30,7 @@ class ProfileController extends Controller
     public function showAction($slug)
     {	
 		$dm =  $this->get('doctrine.odm.mongodb.document_manager');
+		// $dm->getRepository('GedmoTranslatable'); 
 		$request = $this->getRequest();
     	$profile = $dm->getRepository('MacauSEOrganizationProfileBundle:Profile')->findOneBy(array('slug' => $slug));
 		$existTags = $this->getExistTags();
@@ -134,8 +132,9 @@ class ProfileController extends Controller
      */
     public function indexAction()
     {
-        $profiles = $this->get('doctrine.odm.mongodb.document_manager')
-        ->getRepository('MacauSEOrganizationProfileBundle:Profile')
+	$dm = $this->get('doctrine.odm.mongodb.document_manager');
+	// $dm->getRepository('StofDoctrineExtensionsBundle:Translation'); 
+        $profiles = $dm->getRepository('MacauSEOrganizationProfileBundle:Profile')
         ->findAll();
 
 

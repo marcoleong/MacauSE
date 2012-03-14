@@ -9,10 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @Route("/", defaults={"_locale" = "en"})
- * @Route("/{_locale}", requirements={"_locale" = "(en|fr|de)"},defaults={"_locale"="en"})
- */
+
 class MainController extends Controller
 {
     /**
@@ -29,7 +26,7 @@ class MainController extends Controller
     }
 
     /**
-     * @Route("/search/",name="macause_main_search")
+     * @Route("/search",name="macause_main_search")
      * @Method({ "head", "get" })
      * @Template("MacauSEMainBundle:Default:search.html.twig")
      */
@@ -54,4 +51,5 @@ class MainController extends Controller
         $resultSet = $sm->getRepository('MacauSEMainBundle:Main')->findByPartialName($request->query->get('p'));
         return array('results' => $resultSet);
     }
+
 }

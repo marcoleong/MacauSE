@@ -6,18 +6,7 @@
 	{% if is_granted('ROLE_ADMIN') %}
 		
 		<!-- <script type="text/javascript" src="/bundles/macausemain/mercury/javascripts/mercury_loader.js"></script> -->
-		<ul class="nav pull-right">
-		<li class="dropdown">
-			<a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ 'profile.show.navbar.action'|trans({}, 'MacauSEOrganizationProfileBundle') }}<span class="caret"></span></a>
-			<ul class="dropdown-menu">
-			    <!-- dropdown menu links -->
-				<li><a href="{{ path('organization_profile_create') }}">{{ 'profile.show.navbar.create'|trans({}, 'MacauSEOrganizationProfileBundle') }}</a></li>
-				<li><a href="#" id="profileEditButton">{{ 'profile.show.navbar.edit'|trans({}, 'MacauSEOrganizationProfileBundle') }} </a></li>
-				<li class="divider"></li>
-				<li><a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
-			 </ul>
-		</li>
-		</ul>
+
 
 		<script type="text/javascript" charset="utf-8">
 		(function(){
@@ -29,11 +18,7 @@
 			})
 		</script>
 	{% endif %}
-	<div class="btn-group pull-right">
-	  	<a class="btn" href="#">中</a>
-		<a class="btn" href="#">ENG</a>
-	  	<a class="btn" href="#">PORT</a>
-	</div>
+	
 	
 {% endblock %}
 
@@ -97,13 +82,7 @@
 	 </div>
 	  <div class="tab-pane mercury-region" data-type="editable" id="services">{{ profile.services | raw }}</div>
 		<div class="tab-pane" id="contacts">
-	  		<address>
-		  		<strong>{{ profile.name}}</strong><br>
-				  		Twitter, Inc.<br>
-			795 Folsom Ave, Suite 600<br>
-			San Francisco, CA 94107<br>
-			P: (123) 456-7890<br>
-		  	</address>
+	  		{{ profile.contacts | raw }}
 		</div>
 		{% if is_granted('ROLE_ADMIN') %}
 		{% include 'MacauSEOrganizationProfileBundle:Profile:show_setting.html.twig' with {'form':form,'profile':profile} %}

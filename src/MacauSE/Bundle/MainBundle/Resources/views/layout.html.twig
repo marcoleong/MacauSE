@@ -34,9 +34,26 @@
 				  <li><a href="{{ path('macause_homepage') }}">{{ 'layout.home'|trans({}, 'MacauSEMainBundle') }}</a></li>
 				  <li><a href="{{ path('organization_profile_directory') }}">{{ 'layout.directory'|trans({}, 'MacauSEMainBundle') }}</a></li>
 				</ul>
-				
+				{% if is_granted('ROLE_ADMIN') %}
+				<ul class="nav pull-right">
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ 'profile.show.navbar.action'|trans({}, 'MacauSEOrganizationProfileBundle') }}<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+					    <!-- dropdown menu links -->
+						<li><a href="{{ path('organization_profile_create') }}">{{ 'profile.show.navbar.create'|trans({}, 'MacauSEOrganizationProfileBundle') }}</a></li>
+						<li><a href="#" id="profileEditButton">{{ 'profile.show.navbar.edit'|trans({}, 'MacauSEOrganizationProfileBundle') }} </a></li>
+						<li class="divider"></li>
+						<li><a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
+					 </ul>
+				</li>
+				</ul>
+				{% endif %}
 				{% block navbar %}{% endblock %}
-
+				<div class="btn-group pull-right">
+				  	<a class="btn {% if app.session.get('_locale') == 'zh' %}active{% endif %}" href="{{ path(app.request.get('_route'), {"_locale": "zh"}) }}">中</a>
+					<a class="btn {% if app.session.get('_locale') == 'en' %}active{% endif %}" href="{{ path(app.request.get('_route'), {"_locale": "en"}) }}">ENG</a>
+				  	<a class="btn {% if app.session.get('_locale') == 'pt' %}active{% endif %}" href="{{ path(app.request.get('_route'), {"_locale": "pt"}) }}">PORT</a>
+				</div>
 				
 			</div>
 		</div>
