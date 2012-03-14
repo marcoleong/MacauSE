@@ -36,7 +36,12 @@
 				</ul>
 				
 				{% block navbar %}{% endblock %}
-
+				<div class="btn-group pull-right">
+				  	<a class="btn" href="{{ path('macause_homepage', {"_locale": "zh"}) }}">中</a>
+					<a class="btn" href="{{ path('macause_homepage', {"_locale": "en"}) }}">ENG</a>
+				  	<a class="btn" href="{{ path('macause_homepage', {"_locale": "pt"}) }}">PORT</a>
+				
+				</div>
 				
 			</div>
 		</div>

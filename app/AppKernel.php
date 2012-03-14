@@ -22,6 +22,7 @@ class AppKernel extends Kernel
 	           new JMS\AopBundle\JMSAopBundle(),
 
 			    new JMS\DiExtraBundle\JMSDiExtraBundle($this),
+			    new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
 
             new FOQ\ElasticaBundle\FOQElasticaBundle(),
 

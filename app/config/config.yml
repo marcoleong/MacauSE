@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
 
+
 framework:
     #esi:             ~
     #translator:      { fallback: %locale% }
@@ -128,3 +129,8 @@ foq_elastica:
                         driver: mongodb # orm, mongodb, propel are available
                         model: MacauSE\Bundle\Organization\ProfileBundle\Document\Profile
                         provider:
+                            
+jms_i18n_routing:
+    default_locale: en
+    locales: [en, pt, zh]
+    strategy: prefix

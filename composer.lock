@@ -1,5 +1,5 @@
 {
-    "hash": "938fdaab8e81a496b3f3704fd71a65c5",
+    "hash": "d67a6933f6249e99b488550e945ddc3b",
     "packages": [
         {
             "package": "doctrine/common",
@@ -22,7 +22,7 @@
         {
             "package": "doctrine/mongodb-odm",
             "version": "dev-master",
-            "source-reference": "5505bf981f0498d55801af02131bc465579a4e6a"
+            "source-reference": "4720f25dd9f9b20bd9b79a2d1af5428aa54b3874"
         },
         {
             "package": "doctrine/mongodb-odm-bundle",
@@ -36,7 +36,7 @@
         {
             "package": "exercise/elastica-bundle",
             "version": "dev-master",
-            "source-reference": "9046d4d1372dbe49975673c9a7efcafcb965efc5"
+            "source-reference": "661c324e43195bf7d9a8588fe1aa58579e7dd859"
         },
         {
             "package": "friendsofsymfony/jsrouting-bundle",
@@ -67,6 +67,11 @@
             "source-reference": "6ba11b8c7769d3eda0eb1a4839fcc4a429943995"
         },
         {
+            "package": "jms/i18n-routing-bundle",
+            "version": "dev-master",
+            "source-reference": "4ec703ec94a06cc0630a29f393cbbf2bc22f0919"
+        },
+        {
             "package": "jms/metadata",
             "version": "1.1.1"
         },
@@ -87,7 +92,7 @@
         {
             "package": "mopa/bootstrap-bundle",
             "version": "dev-master",
-            "source-reference": "e5e98134e24ea08b9078a70af4ce4e45e6a36d7c"
+            "source-reference": "a2ce2c12a02c9e9df10ddda506fca601ec058187"
         },
         {
             "package": "ruflin/Elastica",

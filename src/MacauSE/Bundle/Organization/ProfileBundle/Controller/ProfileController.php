@@ -10,9 +10,6 @@ use MacauSE\Bundle\Organization\ProfileBundle\Document\Profile;
 use MacauSE\Bundle\Organization\ProfileBundle\Document\Tag;
 use MacauSE\Bundle\Organization\ProfileBundle\Form\Type\ProfileType;
 
-/**
- * @Route("/{_locale}", requirements={"_locale" = "(en|fr|de)"})
- */
 class ProfileController extends Controller
 {
 
