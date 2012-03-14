@@ -7,7 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 
 /**
- * @MongoDB\Document(collection="profiles")
+ * @MongoDB\Document
  */
 class Profile
 {
@@ -64,7 +64,7 @@ class Profile
     protected $contacts;
 
     /**
-     * @MongoDB\EmbedMany(targetDocument="Tag")
+     * @MongoDB\ReferenceMany(targetDocument="Tag",simple="true",cascade={"persist"})
      */
     protected $tags = array();
 
@@ -73,6 +73,8 @@ class Profile
         $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
+   
+
     /**
      * Get id
      *
@@ -101,6 +103,16 @@ class Profile
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
     }
 
     /**
@@ -214,17 +226,17 @@ class Profile
     }
 
     /**
-     * Set contact
+     * Set contacts
      *
      * @param string $contacts
      */
-    public function setContact($contacts)
+    public function setContacts($contacts)
     {
         $this->contacts = $contacts;
     }
 
     /**
-     * Get contact
+     * Get contacts
      *
      * @return string $contacts
      */
@@ -242,6 +254,10 @@ class Profile
     {
         $this->tags[] = $tags;
     }
+
+	public function removeAllTags(){
+		$this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+	}
 
     /**
      * Get tags

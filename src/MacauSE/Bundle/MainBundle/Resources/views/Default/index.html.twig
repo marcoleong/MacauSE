@@ -2,11 +2,12 @@
 
 {% block content %}
 	<div class="hero-unit">
-		<h1>Macau General Chamber of Social Enterprises - MGCSE</h1>
+		<h2 class="offset2">Searching for social enterprise in Macau ?</h2>
+		<form action="{{ path('macause_main_search') }}" method="GET" class="form-search offset2 row">
+			<input type="text" name="q" class="input-medium search-query span5" />
+			<input type="submit" value="search" class="btn" / >
+		</form>
 	</div>
 
-	<form action="{{ path('macause_main_search') }}" method="GET" class="form-search offset3 row">
-		<input type="text" name="q" class="input-medium search-query span5" />
-		<input type="submit" value="search" class="btn" / >
-	</form>
+	
 {% endblock %}

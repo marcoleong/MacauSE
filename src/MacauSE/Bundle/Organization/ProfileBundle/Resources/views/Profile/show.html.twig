@@ -1,19 +1,40 @@
 {% extends 'MacauSEOrganizationProfileBundle::layout.html.twig' %}
 
 {% block navbar %}
-	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-		<a href="#" class="btn pull-right" id="profileEditButton">Edit </a>
+{{ parent() }}
+
+	{% if is_granted('ROLE_ADMIN') %}
+		
 		<!-- <script type="text/javascript" src="/bundles/macausemain/mercury/javascripts/mercury_loader.js"></script> -->
-		
-		
+		<ul class="nav pull-right">
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ 'profile.show.navbar.action'|trans({}, 'MacauSEOrganizationProfileBundle') }}<span class="caret"></span></a>
+			<ul class="dropdown-menu">
+			    <!-- dropdown menu links -->
+				<li><a href="{{ path('organization_profile_create') }}">{{ 'profile.show.navbar.create'|trans({}, 'MacauSEOrganizationProfileBundle') }}</a></li>
+				<li><a href="#" id="profileEditButton">{{ 'profile.show.navbar.edit'|trans({}, 'MacauSEOrganizationProfileBundle') }} </a></li>
+				<li class="divider"></li>
+				<li><a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
+			 </ul>
+		</li>
+		</ul>
+
 		<script type="text/javascript" charset="utf-8">
+		(function(){
+			$('.dropdown-toggle').dropdown();
+		})
 			$("#profileEditButton").click(function(){
 				Mercury.trigger('toggle:interface');
 				$(this).toggleClass('btn-warning');
 			})
 		</script>
 	{% endif %}
-
+	<div class="btn-group pull-right">
+	  	<a class="btn" href="#">中</a>
+		<a class="btn" href="#">ENG</a>
+	  	<a class="btn" href="#">PORT</a>
+	</div>
+	
 {% endblock %}
 
 {% block head %}
@@ -36,9 +57,9 @@
 	{% endjavascripts %}
 
 	{% stylesheets '@MarcoLeongMercuryEditorBundle/Resources/public/mercury/stylesheets/mercury.bundle.css'
-	'@MacauSEOrganizationProfileBundle/Resources/public/tagedit/css/jquery.tagedit.css'
 	'@MacauSEOrganizationProfileBundle/Resources/public/tagedit/css/ui-lightness/jquery-ui-1.8.6.custom.css'
 
+		'@MacauSEOrganizationProfileBundle/Resources/public/tag-it/css/tagit.ui-zendesk.css'
 		'@MacauSEOrganizationProfileBundle/Resources/public/tag-it/css/jquery.tagit.css'  %}
 	<link href="{{ asset_url }}" rel="stylesheet" media="screen" />
 	{% endstylesheets %}
@@ -47,20 +68,26 @@
 
 {% block organization_content %}
 <p>
-	<h1>{{ profile.name }}</h1>
-	<div class="mercury-region" data-type="editable" id="short-description">
-	This is an organization which could help you on making a website and stuff.
+	<div class="page-header"><h1>{{ profile.name }}</h1></div>
+	
+	<div class="mercury-region" data-type="editable" id="shortDescription">
+		{{ profile.description }}
 	</div>
+	
+	{% for tag in profile.tags %}
+		<span class="label label-info">{{ tag.name }}</span>
+	{% endfor %}
+	
 </p>
 
 <hr />
 <div class="profileTab tabbable tabs-above">
 	<ul class="nav nav-pills">
-	  <li class="active"><a href="#description" data-toggle="tab">Description</a></li>
-	  <li><a href="#services" data-toggle="tab">Services</a></li>
-	  <li><a href="#contacts" data-toggle="tab">Contacts</a></li>
+	  <li class="active"><a href="#description" data-toggle="tab">{{ 'profile.show.tab.description'|trans({}, 'MacauSEOrganizationProfileBundle') }}</a></li>
+	  <li><a href="#services" data-toggle="tab">{{ 'profile.show.tab.services'|trans({}, 'MacauSEOrganizationProfileBundle') }}</a></li>
+	  <li><a href="#contacts" data-toggle="tab">{{ 'profile.show.tab.contacts'|trans({}, 'MacauSEOrganizationProfileBundle') }}</a></li>
 	{% if is_granted('ROLE_ADMIN') %}
-	  <li><a href="#settings" data-toggle="tab">Settings</a></li>
+	  <li><a href="#settings" data-toggle="tab">{{ 'profile.show.tab.settings'|trans({}, 'MacauSEOrganizationProfileBundle') }}</a></li>
 	{% endif %}
 	</ul>
 	 

@@ -4,10 +4,11 @@ namespace MacauSE\Bundle\Organization\ProfileBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @MongoDB\Document
+ * @UniqueEntity("name")
  */
 class Tag
 {
@@ -51,4 +52,5 @@ class Tag
     {
         return $this->name;
     }
+
 }

@@ -17,13 +17,13 @@ class Profile
     protected $id;
 
     /**
+     * @Assert\NotBlank
      * @MongoDB\String
      */
     protected $name;
 
     /**
      * @Gedmo\Slug(separator="-", updatable=true, fields={"name"})
-     * @Assert\NotBlank
      * @MongoDB\String
      */
     protected $slug;
@@ -38,7 +38,6 @@ class Profile
      * @var timestamp $created
      *
      * @MongoDB\Timestamp
-     * @Gedmo\Timestampable(on="create")
      */
     protected $created;
 
@@ -46,7 +45,6 @@ class Profile
      * @var date $updated
      *
      * @MongoDB\Date
-     * @Gedmo\Timestampable
      */
     protected $updated;
 
@@ -63,11 +61,17 @@ class Profile
     /**
      * @MongoDB\String
      */
-    protected $contact;
+    protected $contacts;
 
     /**
-     * @MongoDB\EmbedMany(targetDocument="Tag")
+     * @MongoDB\ReferenceMany(targetDocument="Tag")
      */
     protected $tags = array();
 
+    public function __construct()
+    {
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+   
 }

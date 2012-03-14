@@ -9,29 +9,33 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use MacauSE\Bundle\Organization\ProfileBundle\Document\Profile;
 use MacauSE\Bundle\Organization\ProfileBundle\Document\Tag;
 use MacauSE\Bundle\Organization\ProfileBundle\Form\Type\ProfileType;
+
+/**
+ * @Route("/{_locale}", requirements={"_locale" = "(en|fr|de)"})
+ */
 class ProfileController extends Controller
 {
 
+	public function getExistTags(){
+		$dm =  $this->get('doctrine.odm.mongodb.document_manager');
+		
+		$tags = $dm->getRepository('MacauSEOrganizationProfileBundle:Tag')->findAll();
+		$arr = array();
+		foreach($tags as $tag){
+			$arr[] = $tag->getName();
+		}
+		return $arr;
+	}
     /**
      * @Route("/show/{slug}",name="organization_profile_show")
      * @Template("MacauSEOrganizationProfileBundle:Profile:show.html.twig")
      */
     public function showAction($slug)
-    {
+    {	
 		$dm =  $this->get('doctrine.odm.mongodb.document_manager');
 		$request = $this->getRequest();
     	$profile = $dm->getRepository('MacauSEOrganizationProfileBundle:Profile')->findOneBy(array('slug' => $slug));
-
-		// $tag1 = new Tag();
-		// $tag1->setName('Hello0');
-		// $tag2 = new Tag();
-		// $tag2->setName('Hello1');
-		// $tag3 = new Tag();
-		// $tag3->setName('Hello2');
-		// $profile->addTags($tag1);
-		// $profile->addTags($tag2);
-		// $profile->addTags($tag3);
-		
+		$existTags = $this->getExistTags();
         if (!$profile) {
 	        throw $this->createNotFoundException('No organization found.');
 	    }
@@ -43,22 +47,30 @@ class ProfileController extends Controller
 			$form_view = $form->createView();
 			
 			if ($request->getMethod() == 'POST') {
-				//$form->bindRequest($request);
+				// $form->bindRequest($request);
 				$tags = $request->request->get('tags');
-			
-				foreach($tags as $tag){
-					try{
-						$newTag = new Tag();
-						$newTag->setName($tag);
-						$profile->addTags($newTag);
-					}catch(Exception $e){
-						echo $e;
+				$profile->removeAllTags();
+				
+				if(!is_null($tags)){
+					foreach($tags['tags'] as $tagName){
+						$tagObj = null;
+						if(in_array($tagName,$existTags)){
+							$tagObj = $dm->getRepository('MacauSEOrganizationProfileBundle:Tag')->findOneBy(array('name'=> $tagName));
+						}else{
+							$tagObj = new Tag();
+							$tagObj->setName($tagName);
+							$dm->persist($tagObj);
+						}	
+						$profile->addTags($tagObj);
 					}
 				}
+				
 				$dm->persist($profile);
 				$dm->flush();
-				
+
 		        return $this->redirect($this->generateUrl('organization_profile_show', array('slug' => $profile->getSlug())));
+				
+			
 			}
 		}else{
 			$form_view = null;

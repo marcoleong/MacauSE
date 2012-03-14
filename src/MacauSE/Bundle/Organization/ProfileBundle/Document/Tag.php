@@ -8,12 +8,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @MongoDB\Document
- * @UniqueEntity("name")
  */
 class Tag
 {
     /**
-     * @MongoDB\Id
+     * @MongoDB\Id(strategy="auto")
      */
     protected $id;
 

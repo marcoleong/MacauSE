@@ -15,6 +15,7 @@
 	'js/vendor/underscore-min.js'
 	'js/vendor/backbone-min.js'
 	'@MacauSEMainBundle/Resources/public/bootstrap/js/bootstrap-tab.js'
+	'@MacauSEMainBundle/Resources/public/bootstrap/js/bootstrap-dropdown.js'
 	'@MacauSEMainBundle/Resources/public/js/main.js' %}
 	<script src="{{ asset_url }}" type="text/javascript"></script>
 	{% endjavascripts%}
@@ -30,27 +31,13 @@
 				</a>
 
 				<ul class="nav">
-				  <li><a href="{{ path('macause_homepage') }}">Home</a></li>
-				  <li><a href="{{ path('organization_profile_directory') }}">Directory</a></li>
+				  <li><a href="{{ path('macause_homepage') }}">{{ 'layout.home'|trans({}, 'MacauSEMainBundle') }}</a></li>
+				  <li><a href="{{ path('organization_profile_directory') }}">{{ 'layout.directory'|trans({}, 'MacauSEMainBundle') }}</a></li>
 				</ul>
-				{% if is_granted('ROLE_ADMIN') %}
-				<ul class="nav pull-right">
-					<li><a href="{{ path('organization_profile_create') }}">Create</a></li>
-					
-					<li class="divider-vertical"></li>
-  				  	<li><a href="{{ path('fos_user_security_logout') }}">Log out</a></li>
-				</ul>
-				{% endif %}
-
-				
 				
 				{% block navbar %}{% endblock %}
 
-				<!-- <div class="btn-group pull-right">
-				  <a class="btn" href="#">中</a>
-				  <a class="btn" href="#">ENG</a>
-				  <a class="btn" href="#">PORT</a>
-				</div> -->
+				
 			</div>
 		</div>
 	</div>

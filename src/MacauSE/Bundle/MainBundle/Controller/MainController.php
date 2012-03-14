@@ -9,6 +9,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @Route("/", defaults={"_locale" = "en"})
+ * @Route("/{_locale}", requirements={"_locale" = "(en|fr|de)"},defaults={"_locale"="en"})
+ */
 class MainController extends Controller
 {
     /**
