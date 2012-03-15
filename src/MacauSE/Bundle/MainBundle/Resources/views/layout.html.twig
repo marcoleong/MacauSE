@@ -50,9 +50,11 @@
 				{% endif %}
 				{% block navbar %}{% endblock %}
 				<div class="btn-group pull-right">
+
 				  	<a class="btn {% if app.session.get('_locale') == 'zh' %}active{% endif %}" href="{{ path(app.request.get('_route'), {"_locale": "zh"}) }}">中</a>
 					<a class="btn {% if app.session.get('_locale') == 'en' %}active{% endif %}" href="{{ path(app.request.get('_route'), {"_locale": "en"}) }}">ENG</a>
 				  	<a class="btn {% if app.session.get('_locale') == 'pt' %}active{% endif %}" href="{{ path(app.request.get('_route'), {"_locale": "pt"}) }}">PORT</a>
+
 				</div>
 				
 			</div>
