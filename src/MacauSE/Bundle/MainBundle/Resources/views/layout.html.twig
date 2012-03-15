@@ -6,7 +6,7 @@
 	<script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 	
 	{% stylesheets  '@MacauSEMainBundle/Resources/public/css/*'
-					'@MacauSEMainBundle/Resources/public/bootstrap/less/bootstrap.less'
+					'@MopaBootstrapBundle/Resources/public/less/mopabootstrapbundle.less'
 					  filter='less' %}
 	<link href="{{ asset_url }}" rel="stylesheet" media="screen" />
 	{% endstylesheets %}
@@ -14,8 +14,8 @@
 	{% javascripts 	'js/vendor/jquery-1.7.1.min.js'
 	'js/vendor/underscore-min.js'
 	'js/vendor/backbone-min.js'
-	'@MacauSEMainBundle/Resources/public/bootstrap/js/bootstrap-tab.js'
-	'@MacauSEMainBundle/Resources/public/bootstrap/js/bootstrap-dropdown.js'
+	'js/vendor/bootstrap-tab.js'
+	'js/vendor/bootstrap-dropdown.js'
 	'@MacauSEMainBundle/Resources/public/js/main.js' %}
 	<script src="{{ asset_url }}" type="text/javascript"></script>
 	{% endjavascripts%}
