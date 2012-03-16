@@ -6,16 +6,16 @@
 	<script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 	
 	{% stylesheets  '@MacauSEMainBundle/Resources/public/css/*'
-					'bootstrap/less/bootstrap.less'
+					'libs/bootstrap/less/bootstrap.less'
 					  filter='less' %}
 	<link href="{{ asset_url }}" rel="stylesheet" media="screen" />
 	{% endstylesheets %}
 
-	{% javascripts 	'js/vendor/jquery-1.7.1.min.js'
-	'js/vendor/underscore-min.js'
-	'js/vendor/backbone-min.js'
-	'bootstrap/js/bootstrap-tab.js'
-	'bootstrap/js/bootstrap-dropdown.js'
+	{% javascripts 	'libs/js/jquery-1.7.1.min.js'
+	'libs/js/underscore-min.js'
+	'libs/js/backbone-min.js'
+	'libs/bootstrap/js/bootstrap-tab.js'
+	'libs/bootstrap/js/bootstrap-dropdown.js'
 	'@MacauSEMainBundle/Resources/public/js/main.js' %}
 	<script src="{{ asset_url }}" type="text/javascript"></script>
 	{% endjavascripts%}
