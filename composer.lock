@@ -1,5 +1,5 @@
 {
-    "hash": "6516e3fefc4c23760a2d95524ff58697",
+    "hash": "7595a778fe3ef6a95dee624dfd1bd401",
     "packages": [
         {
             "package": "doctrine/common",
@@ -22,7 +22,7 @@
         {
             "package": "doctrine/mongodb-odm",
             "version": "dev-master",
-            "source-reference": "4720f25dd9f9b20bd9b79a2d1af5428aa54b3874"
+            "source-reference": "fcff6211db59760426f08fb4a5c2942d09017561"
         },
         {
             "package": "doctrine/mongodb-odm-bundle",
@@ -51,7 +51,7 @@
         {
             "package": "gedmo/doctrine-extensions",
             "version": "dev-master",
-            "source-reference": "be7292ebce0930e5fecca1b5791b9c16bbc05bde"
+            "source-reference": "fdb2b88aa0e101e884b938e15ac9c14bf3e77699"
         },
         {
             "package": "jms/aop-bundle",
@@ -92,7 +92,7 @@
         {
             "package": "mopa/bootstrap-bundle",
             "version": "dev-master",
-            "source-reference": "a2ce2c12a02c9e9df10ddda506fca601ec058187"
+            "source-reference": "641fce67011af89464b91c9f4cc566517f92f150"
         },
         {
             "package": "ruflin/Elastica",
@@ -146,8 +146,7 @@
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "e01106f2b3d2fa3d333f24298a05db1381e181eb",
-            "alias": "2.1.9999999.9999999-dev"
+            "source-reference": "5631002cd041e1fd34d11254b166d432f87d89ca"
         },
         {
             "package": "twig/extensions",

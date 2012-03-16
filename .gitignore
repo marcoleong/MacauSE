@@ -7,3 +7,4 @@ vendor/
 web/js
 web/css
 composer.phar
+.DS_Store

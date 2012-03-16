@@ -30,7 +30,8 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
 			new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
 			new FOS\UserBundle\FOSUserBundle(),
-	        
+	        // new Mopa\BootstrapBundle\MopaBootstrapBundle(),
+	
 			new MarcoLeong\Bundle\MercuryEditorBundle\MarcoLeongMercuryEditorBundle(),
             new MacauSE\Bundle\Organization\ProfileBundle\MacauSEOrganizationProfileBundle(),
             new MacauSE\Bundle\MainBundle\MacauSEMainBundle(),

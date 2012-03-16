@@ -24,7 +24,6 @@
 		"friendsofsymfony/jsrouting-bundle": "dev-master",
 		"friendsofsymfony/user-bundle": "dev-master",	
 		"jms/di-extra-bundle": "dev-master",
-		"mopa/bootstrap-bundle": "dev-master",
 		"jms/i18n-routing-bundle": "dev-master"
     },
     "scripts": {
