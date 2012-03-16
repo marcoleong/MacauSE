@@ -130,12 +130,12 @@ foq_elastica:
             types:
                 profile:
                     mappings:
-                        name: { boost: 5 }
+                        name: { boost: 5, analyzer: snowball}
                         slug: { boost: 3 }
                         # more mappings...
                     persistence:
                         driver: mongodb # orm, mongodb, propel are available
-                        model: MacauSE\Bundle\Organization\ProfileBundle\Document\Profile
+                        model: MacauSE\DirectoryBundle\Document\Profile
                         provider:
                             
 jms_i18n_routing:

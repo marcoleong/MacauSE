@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+	<script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+	
+
+	{% stylesheets  '@MacauSEWebBundle/Resources/public/stylesheets/css/main.css'
+					'libs/bootstrap/css/bootstrap.css' %}
+
+	<link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+	{% endstylesheets %}
+
+	{% javascripts 	'libs/js/jquery-1.7.1.min.js'
+	'libs/js/underscore-min.js'
+	'libs/js/backbone-min.js'
+	'libs/bootstrap/js/bootstrap-tab.js'
+	'libs/bootstrap/js/bootstrap-dropdown.js'
+	'@MacauSEWebBundle/Resources/public/javascripts/main.js' %}
+	<script src="{{ asset_url }}" type="text/javascript"></script>
+	{% endjavascripts%}
+	{% block head %}{% endblock %}
+	<title>{% block title %}MGCSE{% endblock %}</title>
+</head>
+<body>
+	<div class="navbar">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="{{ path('macause_homepage') }}">
+				  MCGSE
+				</a>
+
+				<ul class="nav">
+				  <li><a href="{{ path('macause_homepage') }}">{{ 'layout.home'|trans({}, 'MacauSEWebBundle') }}</a></li>
+				  <li><a href="{{ path('organization_profile_directory') }}">{{ 'layout.directory'|trans({}, 'MacauSEWebBundle') }}</a></li>
+				</ul>
+				<form action="{{ path('macause_web_search') }}" method="get" class="navbar-search" accept-charset="utf-8">
+					<input class="search-query span2" type="text" name="q" value="" id="q" placeholder="{{ 'main.search'|trans({}, 'MacauSEWebBundle') }}">
+				</form>
+				
+				{% if is_granted('ROLE_ADMIN') %}
+				<ul class="nav pull-right">
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ 'profile.show.navbar.action'|trans({}, 'MacauSEDirectoryBundle') }}<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+					    <!-- dropdown menu links -->
+						<li><a href="{{ path('organization_profile_create') }}">{{ 'profile.show.navbar.create'|trans({}, 'MacauSEDirectoryBundle') }}</a></li>
+						<li><a href="#" id="profileEditButton">{{ 'profile.show.navbar.edit'|trans({}, 'MacauSEDirectoryBundle') }} </a></li>
+						<li class="divider"></li>
+						<li><a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
+					 </ul>
+				</li>
+				</ul>
+				{% endif %}
+				{% block navbar %}{% endblock %}
+			{% block language_switch %}
+				{% include 'MacauSEWebBundle::language_switch.html.twig' %}
+			{% endblock %}
+				
+			</div>
+		</div>
+	</div>
+	<div class="container">
+	{% block content %}
+	{% endblock %}
+	<hr />
+	<footer class="span11"><p>© MGCSE 2012</p></footer>
+
+	</div>
+
+
+</html>

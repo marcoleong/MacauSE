@@ -139,7 +139,6 @@ if (!window.mercuryPackages) window.mercuryPackages = {
               // Instantiate the PageEditor, passing in the options that were provided to the loader.
 			//@Marco changed visible to false
               new Mercury.PageEditor(null, {visible: false});
-				Mercury.saveURL = Routing.generate('mercury_editor_update');
               // If there's a mercuryLoaded function available, call it.   You can provide one before the loading script
               // and it will be called after everything is loaded, but before everything is initialized.  You can bind
               // to the mercury:ready event or use Mercury.bind('ready', function() {}).

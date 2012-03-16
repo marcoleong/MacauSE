@@ -1,0 +1,17 @@
+{% extends 'MacauSEWebBundle::layout.html.twig' %}
+
+{% block content %}
+
+	{% if app.session.flashbag.has('notice') %}
+		<div class="alert">
+		  <a class="close" data-dismiss="alert">×</a>
+		 	{{ app.session.flashbag.get('notice') }}
+		</div>
+	{% endif %}
+
+
+	{% for result in results %}
+		{% include 'MacauSEDirectoryBundle:Profile:index_single.html.twig' with {'profile':result.data} %}
+	{% endfor %}
+
+{% endblock %}

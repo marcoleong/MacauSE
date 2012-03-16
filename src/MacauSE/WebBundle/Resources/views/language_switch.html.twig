@@ -1,0 +1,6 @@
+	<div class="btn-group pull-right" id="language-switch">
+	  	<a class="btn {% if app.session.get('_locale') == 'zh' %}active{% endif %}" href="{{ path('macause_homepage', {"_locale": "zh"}) }}">中</a>
+		<a class="btn {% if app.session.get('_locale') == 'en' %}active{% endif %}" href="{{ path('macause_homepage', {"_locale": "en"}) }}">ENG</a>
+	  	<a class="btn {% if app.session.get('_locale') == 'pt' %}active{% endif %}" href="{{ path('macause_homepage', {"_locale": "pt"}) }}">PORT</a>
+	{# app.request.get('_route') #}
+	</div>

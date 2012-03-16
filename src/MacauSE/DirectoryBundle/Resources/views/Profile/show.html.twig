@@ -1,0 +1,92 @@
+{% extends 'MacauSEDirectoryBundle::layout.html.twig' %}
+
+{% block language_switch %}
+	{% include 'MacauSEDirectoryBundle::show_language_switch.html.twig' with { 'profile': profile } %}
+{% endblock %}
+
+{% block navbar %}
+{{ parent() }}
+	{% if is_granted('ROLE_ADMIN') %}
+		<script type="text/javascript" charset="utf-8">
+		
+		(function(){
+			$('.dropdown-toggle').dropdown();
+		})
+			$("#profileEditButton").click(function(){
+				Mercury.trigger('toggle:interface');
+				$(this).toggleClass('btn-warning');
+				Mercury.saveURL = "{{ path('marcoleong_mercury_editor_save', {'_locale': app.session.get('_locale'),'slug':profile.slug })}}"
+				
+			})
+		</script>
+	{% endif %}
+	
+	
+{% endblock %}
+
+{% block head %}
+	{{ parent() }}
+	{% if is_granted('ROLE_ADMIN') %}
+		{% javascripts 
+			'libs/tagedit/js/jquery-ui-1.8.18.custom.min.js'
+			'libs/tagedit/js/jquery.autoGrowInput.js'
+			'libs/tagedit/js/jquery.tagedit.js'
+			'libs/tag-it/js/tag-it.js'
+	
+			'@MarcoLeongMercuryEditorBundle/Resources/public/mercury/javascripts/mercury_loader.js'
+			'@MarcoLeongMercuryEditorBundle/Resources/public/mercury/javascripts/mercury.min.js'
+		  %}
+		<script src="{{ asset_url }}"></script>
+		{% endjavascripts %}
+
+		{% stylesheets '@MarcoLeongMercuryEditorBundle/Resources/public/mercury/stylesheets/mercury.bundle.css'
+		'libs/tagedit/css/ui-lightness/jquery-ui-1.8.6.custom.css'
+			'libs/tag-it/css/tagit.ui-zendesk.css'
+			'libs/tag-it/css/jquery.tagit.css'  %}
+		<link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+		{% endstylesheets %}
+		
+	{% endif %}
+{% endblock %}
+
+{% block organization_content %}
+<p>
+	<div class="page-header"><h1 class="mercury-region" data-type="editable" id="name">{{ profile.name }}</h1></div>
+	<div class="row">
+		<div class="span4">
+			<p>
+				<a href="#" class="thumbnail">
+		            <img src="http://placehold.it/260x180" alt="">
+		        </a>
+			<p>
+			<ul class="well nav nav-list">
+				<li>
+					<a href="#contacts">{{ 'profile.show.tab.contacts'|trans({}, 'MacauSEDirectoryBundle') }}</a>
+				</li>
+				<li>
+					<a href="#services">{{ 'profile.show.tab.services'|trans({}, 'MacauSEDirectoryBundle') }}</a>
+				</li>
+				<li>
+					<a href="#description">{{ 'profile.show.tab.description'|trans({}, 'MacauSEDirectoryBundle') }}</a>
+				</li>
+			</ul>
+		</div>
+		<div class="span8">
+			<h2>{{ 'profile.show.tab.contacts'|trans({}, 'MacauSEDirectoryBundle') }}</h2>
+			<p class="mercury-region" data-type="editable" id="contacts">{{profile.contacts}}</p>
+			<h2>{{ 'profile.show.tab.services'|trans({}, 'MacauSEDirectoryBundle') }}</h2>
+			<p class="mercury-region" data-type="editable" id="services">{{profile.services}}</p>
+			<h2>{{ 'profile.show.tab.description'|trans({}, 'MacauSEDirectoryBundle') }}</h2>
+			<p class="mercury-region" data-type="editable" id="description">{{profile.description}}</p>
+		</div>
+	</div>
+	
+	{% for tag in profile.tags %}
+		<span class="label label-info">{{ tag.name }}</span>
+	{% endfor %}
+	
+</p>
+
+
+
+{% endblock %}

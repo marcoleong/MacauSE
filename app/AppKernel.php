@@ -12,30 +12,28 @@ class AppKernel extends Kernel
         $bundles = array(
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
            	new Symfony\Bundle\SecurityBundle\SecurityBundle(),
-	           new Symfony\Bundle\TwigBundle\TwigBundle(),
-	           new Symfony\Bundle\MonologBundle\MonologBundle(),
-	           new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
-	           new Symfony\Bundle\AsseticBundle\AsseticBundle(),
-	           new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-	           new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-	           new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
-	           new JMS\AopBundle\JMSAopBundle(),
-
-			    new JMS\DiExtraBundle\JMSDiExtraBundle($this),
-			    new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
-
-            new FOQ\ElasticaBundle\FOQElasticaBundle(),
-
+			new Symfony\Bundle\TwigBundle\TwigBundle(),
+			new Symfony\Bundle\MonologBundle\MonologBundle(),
+			new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
+			new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+			new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
-            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+			new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+	        new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+	        new JMS\AopBundle\JMSAopBundle(),
+			new JMS\DiExtraBundle\JMSDiExtraBundle($this),
+			new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
+            new FOQ\ElasticaBundle\FOQElasticaBundle(),
 			new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
 			new FOS\UserBundle\FOSUserBundle(),
-	        // new Mopa\BootstrapBundle\MopaBootstrapBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
 	
 			new MarcoLeong\Bundle\MercuryEditorBundle\MarcoLeongMercuryEditorBundle(),
-            new MacauSE\Bundle\Organization\ProfileBundle\MacauSEOrganizationProfileBundle(),
-            new MacauSE\Bundle\MainBundle\MacauSEMainBundle(),
+            // new MacauSE\Bundle\Organization\ProfileBundle\MacauSEOrganizationProfileBundle(),
+            // new MacauSE\Bundle\MainBundle\MacauSEMainBundle(),
             new MacauSE\UserBundle\MacauSEUserBundle(),
+            new MacauSE\WebBundle\MacauSEWebBundle(),
+            new MacauSE\DirectoryBundle\MacauSEDirectoryBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

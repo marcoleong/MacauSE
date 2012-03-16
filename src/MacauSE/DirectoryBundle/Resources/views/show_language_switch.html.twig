@@ -1,0 +1,6 @@
+<div class="btn-group pull-right" id="language-switch">
+  	<a class="btn {% if app.session.get('_locale') == 'zh' %}active{% endif %}" href="{{ path('macause_web_language_switch', {"_locale": "zh", "slug": profile.slug, "fallback_route": app.request.get('_route') }) }}">中</a>
+	<a class="btn {% if app.session.get('_locale') == 'en' %}active{% endif %}" href="{{ path('macause_web_language_switch', {"_locale": "en", "slug": profile.slug, "fallback_route": app.request.get('_route') }) }}">ENG</a>
+  	<a class="btn {% if app.session.get('_locale') == 'pt' %}active{% endif %}" href="{{ path('macause_web_language_switch', {"_locale": "pt", "slug": profile.slug, "fallback_route": app.request.get('_route') }) }}">PORT</a>
+{# app.request.get('_route') #}
+</div>

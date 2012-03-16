@@ -1,0 +1,22 @@
+{% extends 'MacauSEDirectoryBundle::layout.html.twig' %}
+
+{% form_theme form 'MacauSEDirectoryBundle:Form:form.html.twig' %}
+
+{% block organization_content %}
+<div class="span11">
+<h2>Create New Organization</h2>
+<form class="form-horizontal" action="{{ path('organization_profile_create') }}" method="POST">
+	<fieldset>
+		<legend>1. Enter the Organization Name</legend>
+
+		{{ form_row(form.name) }}
+		{{ form_row(form._token) }}
+
+		<div class="form-actions">
+			<input type="submit" class="btn" value="{{ 'profile.create.submit'|trans({}, 'MacauSEDirectoryBundle') }}"/>
+		</div>
+	</fieldset>
+	
+</form>
+</div>
+{% endblock %}

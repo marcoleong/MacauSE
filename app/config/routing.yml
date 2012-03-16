@@ -1,15 +1,20 @@
+MacauSEDirectoryBundle:
+    resource: "@MacauSEDirectoryBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+MacauSEWebBundle:
+    resource: "@MacauSEWebBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 MacauSEUserBundle:
     resource: "@MacauSEUserBundle/Controller/"
     type:     annotation
     prefix:   /
-
-MacauSEMainBundle:
-    resource: "@MacauSEMainBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-MacauSEOrganizationProfileBundle:
-    resource: "@MacauSEOrganizationProfileBundle/Controller/"
+    
+MarcoLeongMercuryEditorBundle:
+    resource: "@MarcoLeongMercuryEditorBundle/Controller/"
     type:     annotation
     prefix:   /
 

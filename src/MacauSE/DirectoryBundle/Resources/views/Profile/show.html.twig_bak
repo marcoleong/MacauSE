@@ -1,0 +1,101 @@
+{% extends 'MacauSEDirectoryBundle::layout.html.twig' %}
+
+{% block language_switch %}
+	<div class="btn-group pull-right" id="language-switch">
+	  	<a class="btn {% if app.session.get('_locale') == 'zh' %}active{% endif %}" href="{{ path( app.request.get('_route'), {"_locale": "zh","slug":profile.slug}) }}">中</a>
+		<a class="btn {% if app.session.get('_locale') == 'en' %}active{% endif %}" href="{{ path( app.request.get('_route'), {"_locale": "en","slug":profile.slug}) }}">ENG</a>
+	  	<a class="btn {% if app.session.get('_locale') == 'pt' %}active{% endif %}" href="{{ path( app.request.get('_route'), {"_locale": "pt","slug":profile.slug}) }}">PORT</a>
+	{# app.request.get('_route') #}
+	</div>
+{% endblock %}
+
+{% block navbar %}
+{{ parent() }}
+
+	{% if is_granted('ROLE_ADMIN') %}
+		
+
+		<script type="text/javascript" charset="utf-8">
+		
+		(function(){
+			$('.dropdown-toggle').dropdown();
+		})
+			$("#profileEditButton").click(function(){
+				Mercury.trigger('toggle:interface');
+				$(this).toggleClass('btn-warning');
+			})
+		</script>
+	{% endif %}
+	
+	
+{% endblock %}
+
+{% block head %}
+	{{ parent() }}
+	{% if is_granted('ROLE_ADMIN') %}
+		{% javascripts 
+			'libs/tagedit/js/jquery-ui-1.8.18.custom.min.js'
+			'libs/tagedit/js/jquery.autoGrowInput.js'
+			'libs/tagedit/js/jquery.tagedit.js'
+			'libs/tag-it/js/tag-it.js'
+	
+			'@MarcoLeongMercuryEditorBundle/Resources/public/mercury/javascripts/mercury_loader.js'
+			'@MarcoLeongMercuryEditorBundle/Resources/public/mercury/javascripts/mercury.min.js'
+		  %}
+		<script src="{{ asset_url }}"></script>
+		{% endjavascripts %}
+
+		{% stylesheets '@MarcoLeongMercuryEditorBundle/Resources/public/mercury/stylesheets/mercury.bundle.css'
+		'libs/tagedit/css/ui-lightness/jquery-ui-1.8.6.custom.css'
+			'libs/tag-it/css/tagit.ui-zendesk.css'
+			'libs/tag-it/css/jquery.tagit.css'  %}
+		<link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+		{% endstylesheets %}
+	{% endif %}
+{% endblock %}
+
+{% block organization_content %}
+<p>
+	<div class="page-header"><h1>{{ profile.name }}</h1></div>
+	<div class="span3">
+		<a href="#" class="thumbnail">
+            <img src="http://placehold.it/260x180" alt="">
+         </a>
+	</div>
+	
+	<div class="mercury-region" data-type="editable" id="shortDescription">
+		{{ profile.description }}
+	</div>
+	
+	{% for tag in profile.tags %}
+		<span class="label label-info">{{ tag.name }}</span>
+	{% endfor %}
+	
+</p>
+
+<hr />
+<div class="profileTab tabbable tabs-above">
+	<ul class="nav nav-pills">
+	  <li class="active"><a href="#description" data-toggle="tab">{{ 'profile.show.tab.description'|trans({}, 'MacauSEDirectoryBundle') }}</a></li>
+	  <li><a href="#services" data-toggle="tab">{{ 'profile.show.tab.services'|trans({}, 'MacauSEDirectoryBundle') }}</a></li>
+	  <li><a href="#contacts" data-toggle="tab">{{ 'profile.show.tab.contacts'|trans({}, 'MacauSEDirectoryBundle') }}</a></li>
+	{% if is_granted('ROLE_ADMIN') %}
+	  <li><a href="#settings" data-toggle="tab">{{ 'profile.show.tab.settings'|trans({}, 'MacauSEDirectoryBundle') }}</a></li>
+	{% endif %}
+	</ul>
+	 
+	<div class="tab-content">
+	  <div class="tab-pane active mercury-region" data-type="editable" id="description">
+		  {{ profile.description | raw }}
+	 </div>
+	  <div class="tab-pane mercury-region" data-type="editable" id="services">{{ profile.services | raw }}</div>
+		<div class="tab-pane" id="contacts">
+	  		{{ profile.contacts | raw }}
+		</div>
+		{% if is_granted('ROLE_ADMIN') %}
+		{% include 'MacauSEDirectoryBundle:Profile:show_setting.html.twig' with {'form':form,'profile':profile} %}
+		{% endif %}
+	</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'MacauSEWebBundle::layout.html.twig' %}
+
+{% block content %}
+	<div class="hero-unit">
+		<h2 class="offset2">{{ 'main.search.tagline'|trans({}, 'MacauSEWebBundle') }}</h2>
+		<form action="{{ path('macause_web_search') }}" method="GET" class="form-search offset2">
+				<div class="span12">
+					<p>
+					<input type="text" name="q" class="input-medium search-query span5" />
+					</p>
+				</div>
+				<div class="offset2 span12">
+					<p>
+				<input type="submit" value="{{ 'main.search'|trans({}, 'MacauSEWebBundle') }}" class="btn span2" />
+				</p>
+				</div>
+		</form>
+	</div>
+{% endblock %}
