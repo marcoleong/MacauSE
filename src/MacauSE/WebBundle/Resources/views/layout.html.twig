@@ -7,17 +7,15 @@
 	
 
 	{% stylesheets  '@MacauSEWebBundle/Resources/public/stylesheets/css/main.css'
-					'libs/bootstrap/css/bootstrap.css' %}
+					'libs/bootstrap/css/bootstrap.css' output='css/main.css' filter='yui_css' %}
 
 	<link href="{{ asset_url }}" rel="stylesheet" media="screen" />
 	{% endstylesheets %}
 
 	{% javascripts 	'libs/js/jquery-1.7.1.min.js'
-	'libs/js/underscore-min.js'
-	'libs/js/backbone-min.js'
 	'libs/bootstrap/js/bootstrap-tab.js'
 	'libs/bootstrap/js/bootstrap-dropdown.js'
-	'@MacauSEWebBundle/Resources/public/javascripts/main.js' %}
+	'@MacauSEWebBundle/Resources/public/javascripts/main.js' output="js/main.js" filter='yui_js' %}
 	<script src="{{ asset_url }}" type="text/javascript"></script>
 	{% endjavascripts%}
 	{% block head %}{% endblock %}

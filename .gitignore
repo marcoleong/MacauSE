@@ -8,3 +8,5 @@ web/js
 web/css
 composer.phar
 .DS_Store
+
+app/.DS_Store

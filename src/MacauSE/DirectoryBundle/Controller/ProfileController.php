@@ -33,7 +33,10 @@ class ProfileController extends Controller
     {
 		$dm =  $this->get('doctrine.odm.mongodb.document_manager');
 		// $dm->getRepository('GedmoTranslatable'); 
-    	$profile = $dm->getRepository('MacauSEDirectoryBundle:Profile')->findOneBy(array('slug' => $slug, 'locale' => $request->attributes->get('_locale')));
+    	$profile = $dm->getRepository('MacauSEDirectoryBundle:Profile')->findOneBy(array('slug' => $slug));
+		$profile->setLocale($request->attributes->get('_locale'));
+		$dm->refresh($profile);
+		
 		$existTags = $this->getExistTags();
         if (!$profile) {
 	        throw $this->createNotFoundException('No organization found.');
@@ -83,11 +86,11 @@ class ProfileController extends Controller
      * @Route("/edit/{slug}")
      * @Template("MacauSEDirectoryBundle:Profile:edit.html.twig")
      */
-    public function editAction($slug)
+    public function editAction(Request $request, $slug)
     {
     	$profile = $this->get('doctrine.odm.mongodb.document_manager')
         ->getRepository('MacauSEDirectoryBundle:Profile')
-        ->findBy(array('slug'=>$slug));
+        ->findBy(array('slug'=>$slug, 'locale' => $request->attributes->get('_locale')));
 
         if (!$profile) {
 	        throw $this->createNotFoundException('No product found for id '.$id);
@@ -115,7 +118,6 @@ class ProfileController extends Controller
 				$locale = $request->attributes->get('_locale');
 		
 	            // perform some action, such as saving the task to the database
-				$profile->setLocale($locale);
 	            $dm->persist($profile);
 	            $dm->flush();
 	            return $this->redirect($this->generateUrl('organization_profile_show', array('slug' => $profile->getSlug())));
@@ -131,11 +133,10 @@ class ProfileController extends Controller
     public function indexAction(Request $request)
     {
 		$dm = $this->get('doctrine.odm.mongodb.document_manager');
-        $profiles = $dm->getRepository('MacauSEDirectoryBundle:Profile')
-        ->findBy(array('locale' => $request->attributes->get('_locale')));
-
-        if (!$profiles) {
-            throw $this->createNotFoundException('No organization found for slug '.$slug);
+        $profiles = $dm->createQueryBuilder('MacauSEDirectoryBundle:Profile')->getQuery()->execute();
+        if ($profiles->count() <= 0) {
+	        $this->get('session')->setFlash('notice', 'No results was found!');
+            // throw $this->createNotFoundException('No organization found');
         }
 
         return array('profiles'=>$profiles);

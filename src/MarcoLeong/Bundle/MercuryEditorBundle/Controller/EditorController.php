@@ -24,7 +24,9 @@ class EditorController extends Controller
 		
 		if($request->isXmlHttpRequest()){
 			$dm =  $this->get('doctrine.odm.mongodb.document_manager'); 
-	    	$profile = $dm->getRepository('MacauSEDirectoryBundle:Profile')->findOneBy(array('slug' => $slug,'locale'=>$locale));
+	    	$profile = $dm->getRepository('MacauSEDirectoryBundle:Profile')->findOneBy(array('slug' => $slug));
+			$profile->setLocale($locale);
+			$dm->refresh($profile);
 			if(!$profile){
 		        throw $this->createNotFoundException('No organization found.');
 			}
@@ -36,7 +38,6 @@ class EditorController extends Controller
 				call_user_func(array($profile, 'set'.ucfirst($field)),$value['value']);
 			}	
 
-			$profile->setTranslatableLocale($locale);
 			$dm->persist($profile);
 			$dm->flush();
 

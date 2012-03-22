@@ -18,4 +18,9 @@ class ProfileControllerTest extends WebTestCase
        	//Test presents of language bar
 		
     }
+
+	public function testTranslationSlug()
+	{
+		
+	}
 }

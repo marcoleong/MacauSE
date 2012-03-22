@@ -25,7 +25,7 @@ class Profile implements Translatable
     protected $name;
 
     /**
-     * @Gedmo\Slug(separator="-", updatable=true, fields={"name"})
+     * @Gedmo\Slug(separator="-", updatable=false, fields={"name"})
      * @MongoDB\String
      */
     protected $slug;

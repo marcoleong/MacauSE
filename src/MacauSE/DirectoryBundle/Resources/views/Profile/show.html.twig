@@ -35,14 +35,15 @@
 	
 			'@MarcoLeongMercuryEditorBundle/Resources/public/mercury/javascripts/mercury_loader.js'
 			'@MarcoLeongMercuryEditorBundle/Resources/public/mercury/javascripts/mercury.min.js'
+			
 		  %}
 		<script src="{{ asset_url }}"></script>
 		{% endjavascripts %}
 
 		{% stylesheets '@MarcoLeongMercuryEditorBundle/Resources/public/mercury/stylesheets/mercury.bundle.css'
-		'libs/tagedit/css/ui-lightness/jquery-ui-1.8.6.custom.css'
+			'libs/tagedit/css/ui-lightness/jquery-ui-1.8.6.custom.css'
 			'libs/tag-it/css/tagit.ui-zendesk.css'
-			'libs/tag-it/css/jquery.tagit.css'  %}
+			'libs/tag-it/css/jquery.tagit.css' filter='yui_css' output='css/admin.css' %}
 		<link href="{{ asset_url }}" rel="stylesheet" media="screen" />
 		{% endstylesheets %}
 		

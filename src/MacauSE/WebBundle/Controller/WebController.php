@@ -45,21 +45,24 @@ class WebController extends Controller
 	 */
 	public function languageSwitchAction(Request $request)
 	{
-		$to_locale = $request->query->get('_locale');
+		$to_locale = $request->attributes->get('_locale');
 		$profile_slug = $request->query->get('slug');
 		$fallback_route = $request->query->get('fallback_route') != null ? $request->query->get('fallback_route') : 'macause_homepage' ;
 		
+		
 		$dm =  $this->get('doctrine.odm.mongodb.document_manager');
+		$document_translation = $dm->getRepository('Gedmo\Translatable\Document\Translation');
+		
 		//in directory page, if user is admin, create new translation, else if
 		if($fallback_route == "organization_profile_show"){
 			if($this->get('security.context')->isGranted('ROLE_ADMIN')){
-				//check if it have the locale.
-				$current_profile = $dm->getRepository('MacauSEDirectoryBundle:Profile')->findOneBy(array('slug' => $profile_slug));
-		    	$profile = $dm->getRepository('MacauSEDirectoryBundle:Profile')->findOneBy(array('slug' => $profile_slug, 'locale' => $to_locale));
-				if(!$profile){
+				//check if it have the translation.
+		    	$profile = $dm->getRepository('MacauSEDirectoryBundle:Profile')->findOneBy(array('slug' => $profile_slug));
+				$translations = $document_translation->findTranslations($profile);
+				if(!array_key_exists($to_locale,$translations)){
 					// create new translation
-					$current_profile->setTranslatableLocale($to_locale);
-					$dm->persist($current_profile);
+					$profile->setTranslatableLocale($to_locale);
+					$dm->persist($profile);
 					$dm->flush();
 					$redirect_url = $this->generateUrl($fallback_route, array('slug' => $profile_slug, '_locale' => $to_locale));
 				}else{
